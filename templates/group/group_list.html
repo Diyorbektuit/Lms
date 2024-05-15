@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 24px;
+        }
+        .back-to-groups {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .back-to-groups a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-body a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .centered-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Guruhlar
+    </header>
+    <div class="back-to-groups container">
+        <a href="{% url 'logout' %}" class="btn btn-danger">Chiqish</a>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for group in groups %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        {{ group.name }}
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'students' group.id %}" >Guruhga o'tish</a>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </div>
+        <div class="row">
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="centered-button">
+        <button type="submit" class="btn btn-custom"><a href="{% url 'group_create'%}" style="color: white; text-decoration: none;">Guruh yaratish</a></button>
+    </div>
+</body>
+</html>
