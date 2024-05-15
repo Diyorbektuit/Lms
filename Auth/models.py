@@ -12,7 +12,8 @@ class CustomUser(AbstractUser):
         verbose_name=_('groups'),
         blank=True,
         related_name='custom_user_groups',  # Change 'custom_user_groups' to your preferred name
-        help_text=_('The groups this user belongs to. A user will get all permissions granted to each of their groups.'),
+        help_text=_(
+            'The groups this user belongs to. A user will get all permissions granted to each of their groups.'),
     )
     user_permissions = models.ManyToManyField(
         Permission,

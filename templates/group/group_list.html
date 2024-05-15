@@ -19,6 +19,16 @@
             text-align: center;
             font-size: 24px;
         }
+        .profile-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .profile-btn a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
         .back-to-groups {
             text-align: right;
             margin-top: 20px;
@@ -75,10 +85,10 @@
 <body>
     <header>
         Guruhlar
+        <div class="profile-btn">
+            <a href="{% url 'profile' %}" class="btn btn-primary">Profil</a>
+        </div>
     </header>
-    <div class="back-to-groups container">
-        <a href="{% url 'logout' %}" class="btn btn-danger">Chiqish</a>
-    </div>
     <div class="container">
         <div class="row">
             {% for group in groups %}

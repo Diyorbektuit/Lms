@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'Auth.apps.AuthConfig',
     'davomat.apps.DavomatConfig',
+    'profil.apps.ProfilConfig',
 
 ]
 
