@@ -24,3 +24,9 @@ class StudentCreateForm(ModelForm):
     class Meta:
         model = Student
         fields = ['first_name', 'last_name']
+
+
+class GroupEditForm(ModelForm):
+    class Meta:
+        model = Group
+        fields = ['name']

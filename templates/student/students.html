@@ -37,7 +37,7 @@
         .form-group {
             margin-bottom: 20px;
         }
-        .delete-group {
+        .manage-group {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -49,6 +49,15 @@
         .btn-custom:hover {
             background-color: #c82333;
             border-color: #c82333;
+        }
+        .btn-edit {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: all 0.3s ease;
+        }
+        .btn-edit:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
         }
         .table-responsive {
             margin-bottom: 20px;
@@ -69,8 +78,9 @@
 <div class="back-to-groups container">
     <a href="{% url 'home' %}" class="btn btn-secondary">Guruhlarga qaytish</a>
 </div>
-<div class="delete-group">
-    <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#deleteGroupModal">Delete Group</button>
+<div class="manage-group">
+    <a href="{% url 'group_edit' group.id %}" class="btn btn-edit">Guruhni tahrirlash</a>
+    <button type="button" class="btn btn-custom" data-bs-toggle="modal" data-bs-target="#deleteGroupModal">Guruhni o'chirish</button>
 </div>
 <div class="container">
     <h2>Talabalar</h2>
@@ -120,15 +130,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteGroupModalLabel">Delete Group</h5>
+                <h5 class="modal-title" id="deleteGroupModalLabel">Guruhni o'chirish</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Rostan o'chirmoqchimisiz?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <a href="{% url 'group_delete' group.id %}" class="btn btn-danger">Delete</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+                <a href="{% url 'group_delete' group.id %}" class="btn btn-danger">O'chirish</a>
             </div>
         </div>
     </div>

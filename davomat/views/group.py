@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 
-from davomat.forms import GroupCreateForm
+from davomat.forms import GroupCreateForm, GroupEditForm
 from davomat.models import Group
 
 
@@ -37,3 +38,24 @@ def group_create(request):
         return render(request, 'group/group_create.html', {'form': form})
     else:
         return redirect('login')
+
+
+@login_required
+def group_edit(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+
+    if request.user != group.owner:
+        return redirect('login')  # Or handle unauthorized access appropriately
+
+    if request.method == 'POST':
+        form = GroupEditForm(request.POST, instance=group)
+        if form.is_valid():
+            form.save()
+            return redirect('students', group_id=group.id)  # Redirect to the group's student list
+    else:
+        form = GroupEditForm(instance=group)
+
+    # Add the CSS class to the form field
+    form.fields['name'].widget.attrs.update({'class': 'form-control'})
+
+    return render(request, 'group/group_edit.html', {'form': form, 'group': group})

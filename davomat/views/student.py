@@ -39,3 +39,4 @@ def students_delete(request, student_id):
         return redirect('students', group_id=student.group.id)
     else:
         return redirect('students', group_id=student.group.id)
+
