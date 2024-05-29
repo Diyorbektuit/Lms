@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import update_session_auth_hash
 from .forms import PasswordUpdateForm
 
+
 def profile(request):
     if request.user.is_authenticated:
         context = {
@@ -34,15 +35,4 @@ def update_name(request):
     return render(request, 'profile/profile_update.html', {'form': form})
 
 
-@login_required
-def update_password(request):
-    if request.method == 'POST':
-        form = PasswordUpdateForm(user=request.user, data=request.POST)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)  # Important to update session with new password
-            return redirect('profile')
-    else:
-        form = PasswordUpdateForm(user=request.user)
-    return render(request, 'profile/password_update.html', {'form': form})
 
